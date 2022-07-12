@@ -3,7 +3,7 @@ const app = express();
 const User = require('./models/User');
 const Message = require('./models/Message');
 const userRoutes = require('./routes/userRoutes');
-
+const mongoose = require("mongoose");
 const rooms = ['tech', 'sports', 'food', 'general'];
 const cors = require('cors');
 
@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users', userRoutes)
-require('./connection')
+
 
 
 const server = require('http').createServer(app);
@@ -99,4 +99,9 @@ io.on('connection', (socket)=>{
 
 server.listen(PORT, ()=>{
 console.log('listening to', PORT)
+})
+
+
+mongoose.connect(`mongodb+srv://Gsathiya:capstoneproject@cluster0.ktemn.mongodb.net/CHATAPP?retryWrites=true&w=majority`,()=>{
+    console.log("DB connected")
 })
